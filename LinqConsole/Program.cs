@@ -10,6 +10,16 @@ namespace LinqConsole
     {
         static void Main(string[] args)
         {
+            EmployeeDataContext db = new EmployeeDataContext();
+
+            var result= db.Employees
+                        .Where(x => x.Gender == "Male")
+                        .OrderByDescending(x => x.Salary)
+                        .Take(5);
+            foreach (var e in result)
+            {
+                Console.WriteLine(e.FirstName + " " + e.LastName + "\t" + e.Salary);
+            }
         }
     }
 }

@@ -8,15 +8,6 @@
       <Column Name="Gender" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Salary" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DepartmentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Department_Employee" Member="Department" ThisKey="DepartmentId" OtherKey="ID" Type="Department" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Departments" Member="Departments">
-    <Type Name="Department">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Department_Employee" Member="Employees" ThisKey="ID" OtherKey="DepartmentId" Type="Employee" />
     </Type>
   </Table>
 </Database>
