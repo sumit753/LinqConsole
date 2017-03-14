@@ -45,6 +45,49 @@ namespace LinqConsole
                 }
             }
 
+
+            Console.WriteLine();
+
+            Console.WriteLine("GroupBy Mulitple Keys");
+
+            var MultipleKeygroups = Worker.GetAllWorkers().GroupBy(x => new { x.Department, x.Gender }).OrderBy(g => g.Key.Department)
+                                    .ThenBy(g => g.Key.Gender)
+                                    .Select(individualgrp => new { Department = individualgrp.Key.Department ,
+                                                        Gender = individualgrp.Key.Gender,
+                                                        Employees = individualgrp.OrderBy(x=>x.Name)
+            
+                                                   });
+
+            //the above query can also be written in sql 
+
+            //var MultipleKeyGrps = from employee in Worker.GetAllWorkers()
+            //                      group employee by new { employee.Department, employee.Gender }
+            //                      into eGrps
+            //                      orderby eGrps.Key.Department, eGrps.Key.Department
+            //                      select
+            //                      (new
+            //                      {
+            //                          Gender = eGrps.Key.Gender,
+            //                          Department = eGrps.Key.Department,
+            //                          Employees = eGrps.OrderBy(x=>x.Name)
+            //                      }
+            //                      );
+                                 
+                                  
+                                  
+
+            foreach(var grp in MultipleKeygroups)
+            {
+                Console.WriteLine("====================================================");
+                Console.WriteLine("Department {0}\t|Gender : {1}\t|TotalEmployees:{2}", grp.Department,grp.Gender,grp.Employees.Count());
+                Console.WriteLine("====================================================");
+                foreach (var emp in grp.Employees)
+                {
+                    Console.WriteLine(emp.Department+ "\t"+emp.Gender+"\t" +emp.Name);
+                }
+            }
+
+
         }
 
     }
